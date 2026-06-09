@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>動物森友會的日常紀錄 🦎</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>爬蟲小寶貝的萌寵日常紀錄 🦎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4CAF50;
@@ -34,7 +34,6 @@
         h1 { font-size: 26px; color: #2e7d32; margin-bottom: 5px; }
         .subtitle { font-size: 14px; color: var(--text-light); }
         
-        /* Sub-page 導覽列 */
         .tab-nav {
             display: flex; gap: 10px; margin-bottom: 25px;
             background: #eee; padding: 6px; border-radius: 15px;
@@ -50,7 +49,6 @@
         .page-content { display: none; }
         .page-content.active { display: block; }
 
-        /* 表單樣式 */
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 700; margin-bottom: 8px; color: #2e7d32; font-size: 16px; }
         input[type="text"], input[type="date"] {
@@ -64,30 +62,30 @@
         .reptile-card.selected { background-color: #e8f5e9; border-color: var(--primary); }
         .reptile-emoji { font-size: 30px; display: block; }
         .reptile-name { font-size: 13px; font-weight: 500; }
+        
         .todo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .todo-item {
             display: flex; align-items: center; padding: 12px;
             border: 2px solid var(--border-color); border-radius: 12px; cursor: pointer; background: #fff;
         }
         .todo-item input[type="checkbox"] { margin-right: 10px; width: 18px; height: 18px; accent-color: var(--primary); }
-        .sub-input-box { background: #f9f9f9; border: 2px dashed #4CAF50; border-radius: 12px; padding: 15px; margin-top: -10px; margin-bottom: 15px; display: none; }
-        .sub-input-flex { display: flex; gap: 10px; }
-        .sub-input-flex div { flex: 1; }
         
+        /* 展開的動態區塊基底 */
+        .sub-input-box { background: #f9f9f9; border: 2px dashed #4CAF50; border-radius: 12px; padding: 15px; margin-top: -10px; margin-bottom: 15px; display: none; }
+        
+        /* 食物選單專用樣式 */
+        .food-item-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; background: #fff; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 8px; }
+        .food-label-part { display: flex; align-items: center; font-weight: 500; font-size: 15px; }
+        .food-label-part input[type="checkbox"] { margin-right: 8px; width: 16px; height: 16px; accent-color: var(--primary); }
+        .food-input-qty { width: 100px !important; padding: 6px 10px !important; text-align: center; }
+        .food-other-detail { display: none; margin-top: 8px; }
+
         button[type="submit"] {
             width: 100%; padding: 15px; background-color: var(--primary); color: white;
             border: none; border-radius: 15px; font-size: 18px; font-weight: 700; cursor: pointer;
         }
-        
-        /* 內嵌 Excel RWD 容器 */
-        .iframe-container {
-            position: relative; overflow: hidden; width: 100%; padding-top: 120%; /* 調整高度比例 */
-            border-radius: 15px; border: 2px solid var(--border-color);
-        }
-        .iframe-container iframe {
-            position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none;
-        }
-
+        .iframe-container { position: relative; overflow: hidden; width: 100%; padding-top: 120%; border-radius: 15px; border: 2px solid var(--border-color); }
+        .iframe-container iframe { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; border: none; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 350px; }
         .modal-btn { margin-top: 20px; padding: 10px 25px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; }
@@ -98,12 +96,12 @@
 <div class="container">
     <header>
         <h1>爬蟲日常照顧系統 🦎</h1>
-        <p class="subtitle">用心記錄各動物的暖心日常</p>
+        <p class="subtitle">用心記錄冷血寶貝的暖心日常</p>
     </header>
 
     <div class="tab-nav">
         <button class="tab-btn active" onclick="switchPage('formPage', this)">✍️ 填寫本日紀錄</button>
-        <button class="tab-btn" onclick="switchPage('listPage', this)">📅 查看今日進度</button>
+        <button class="tab-btn" onclick="switchPage('listPage', this)">📅 查看當日進度</button>
     </div>
 
     <div id="formPage" class="page-content active">
@@ -114,8 +112,8 @@
             </div>
 
             <div class="form-group">
-                <label for="keeperName">記錄者姓名</label>
-                <input type="text" id="keeperName" placeholder="例如：陳大明" required>
+                <label for="keeperName">記錄者姓名 / 寶貝暱稱</label>
+                <input type="text" id="keeperName" placeholder="例如：阿明 / 綠綠" required>
             </div>
 
             <div class="form-group">
@@ -125,8 +123,8 @@
                     <div class="reptile-card" data-value="蛇"><span class="reptile-emoji">🐍</span><span class="reptile-name">蛇</span></div>
                     <div class="reptile-card" data-value="龍蜥"><span class="reptile-emoji">🦖</span><span class="reptile-name">龍蜥</span></div>
                     <div class="reptile-card" data-value="眼斑水龜"><span class="reptile-emoji">🐢</span><span class="reptile-name">眼斑水龜</span></div>
-                    <div class="reptile-card" data-value="鬆獅蜥蜴"><span class="reptile-emoji">🦖</span><span class="reptile-name">鬆獅蜥蜴</span></div>
-                    <div class="reptile-card" data-value="紅腿象龜"><span class="reptile-emoji">🐢</span><span class="reptile-name">紅腿象龜</span></div>
+                    <div class="reptile-card" data-value="鬆獅蜥蜴"><span class="reptile-emoji">🌵</span><span class="reptile-name">鬆獅蜥蜴</span></div>
+                    <div class="reptile-card" data-value="紅眼象龜"><span class="reptile-emoji">🧱</span><span class="reptile-name">紅眼象龜</span></div>
                 </div>
                 <input type="hidden" id="selectedReptile" required>
             </div>
@@ -150,15 +148,15 @@
                     <label class="food-label-part"><input type="checkbox" class="food-cb" value="蟋蟀"> 蟋蟀</label>
                     <input type="text" id="qtyCricket" class="food-input-qty" placeholder="數量 (如: 5隻)">
                 </div>
-
-                 <div class="food-item-row">
+                
+                <div class="food-item-row">
                     <label class="food-label-part"><input type="checkbox" class="food-cb" value="大白鼠"> 大白鼠</label>
-                    <input type="text" id="qtyCricket" class="food-input-qty" placeholder="數量 (如: 5隻)">
+                    <input type="text" id="qtyDubia" class="food-input-qty" placeholder="數量 (如: 3隻)">
                 </div>
                 
                 <div class="food-item-row" style="flex-wrap: wrap; margin-bottom:0;">
                     <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
-                        <label class="food-label-part"><input type="checkbox" id="foodCbOther" value="其他">其他</label>
+                        <label class="food-label-part"><input type="checkbox" id="foodCbOther" value="其他"> 其他</label>
                         <input type="text" id="qtyOther" class="food-input-qty" placeholder="數量 (如: 1盤)">
                     </div>
                     <div class="food-other-detail" id="foodOtherDetailBox" style="width:100%;">
@@ -202,22 +200,17 @@
 </div>
 
 <script>
-    // 子頁面切換控制
     function switchPage(pageId, btnElement) {
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        
         document.getElementById(pageId).classList.add('active');
         btnElement.classList.add('active');
-        
-        // 切換到列表時，自動重新整理 iframe 確保抓到最新數據
         if(pageId === 'listPage') {
             const iframe = document.getElementById('excelIframe');
             iframe.src = iframe.src;
         }
     }
 
-    // 前端邏輯控制 (與前版相同)
     document.getElementById('recordDate').value = new Date().toISOString().split('T')[0];
     const cards = document.querySelectorAll('.reptile-card');
     const hiddenInput = document.getElementById('selectedReptile');
@@ -229,9 +222,15 @@
         });
     });
 
+    // 餵食主控制
     const feedCheck = document.getElementById('feedCheck');
     const feedInputBox = document.getElementById('feedInputBox');
     feedCheck.addEventListener('change', () => { feedInputBox.style.display = feedCheck.checked ? 'block' : 'none'; });
+
+    // 「其他」食物的文字框彈出控制
+    const foodCbOther = document.getElementById('foodCbOther');
+    const foodOtherDetailBox = document.getElementById('foodOtherDetailBox');
+    foodCbOther.addEventListener('change', () => { foodOtherDetailBox.style.display = foodCbOther.checked ? 'block' : 'none'; });
 
     const weightCheck = document.getElementById('weightCheck');
     const weightInputBox = document.getElementById('weightInputBox');
@@ -243,7 +242,25 @@
 
         let checkedTodos = [];
         document.querySelectorAll('input[name="todo"]:checked').forEach(cb => { checkedTodos.push(cb.value); });
-        let foodDetails = feedCheck.checked ? `${document.getElementById('foodType').value || '未填'}(${document.getElementById('foodQty').value || '0'})` : '無';
+        
+        // 整理食物複選結果
+        let foodArray = [];
+        document.querySelectorAll('.food-cb:checked').forEach(cb => {
+            if(cb.value === "蟋蟀") {
+                let qty = document.getElementById('qtyCricket').value || '未填';
+                foodArray.push(`蟋蟀(${qty})`);
+            } else if(cb.value === "大白鼠") {
+                let qty = document.getElementById('qtyDubia').value || '未填';
+                foodArray.push(`大白鼠(${qty})`);
+            }
+        });
+        if(foodCbOther.checked) {
+            let desc = document.getElementById('foodOtherDesc').value || '其他食物';
+            let qty = document.getElementById('qtyOther').value || '未填';
+            foodArray.push(`${desc}(${qty})`);
+        }
+        let foodDetails = feedCheck.checked ? (foodArray.join('、') || '勾選餵食但未選種類') : '無';
+
         let weightDetail = weightCheck.checked ? (document.getElementById('petWeight').value || '未磅') : '無';
 
         const formData = {
@@ -277,6 +294,7 @@
             cards.forEach(c => c.classList.remove('selected'));
             hiddenInput.value = "";
             feedInputBox.style.display = 'none';
+            foodOtherDetailBox.style.display = 'none';
             weightInputBox.style.display = 'none';
         }).catch(err => {
             alert('傳送失敗：' + err);
