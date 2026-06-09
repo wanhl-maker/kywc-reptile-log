@@ -144,9 +144,26 @@
             </div>
 
             <div class="sub-input-box" id="feedInputBox">
-                <div class="sub-input-flex">
-                    <div><label>食物種類</label><input type="text" id="foodType" placeholder="如: 杜比亞"></div>
-                    <div><label>數量</label><input type="text" id="foodQty" placeholder="如: 5隻"></div>
+                <label style="font-size: 14px; color: var(--text-light); margin-bottom: 10px;">請選擇餵食種類並填寫數量：</label>
+                
+                <div class="food-item-row">
+                    <label class="food-label-part"><input type="checkbox" class="food-cb" value="蟋蟀"> 🦗 蟋蟀</label>
+                    <input type="text" id="qtyCricket" class="food-input-qty" placeholder="數量 (如: 5隻)">
+                </div>
+                
+                <div class="food-item-row">
+                    <label class="food-label-part"><input type="checkbox" class="food-cb" value="杜比亞"> 🪳 杜比亞</label>
+                    <input type="text" id="qtyDubia" class="food-input-qty" placeholder="數量 (如: 3隻)">
+                </div>
+                
+                <div class="food-item-row" style="flex-wrap: wrap; margin-bottom:0;">
+                    <div style="display:flex; justify-content:space-between; width:100%; align-items:center;">
+                        <label class="food-label-part"><input type="checkbox" id="foodCbOther" value="其他"> 🍃 其他</label>
+                        <input type="text" id="qtyOther" class="food-input-qty" placeholder="數量 (如: 1盤)">
+                    </div>
+                    <div class="food-other-detail" id="foodOtherDetailBox" style="width:100%;">
+                        <input type="text" id="foodOtherDesc" placeholder="請填寫食物種類說明 (如：桑葉、高麗菜、飼料)">
+                    </div>
                 </div>
             </div>
 
